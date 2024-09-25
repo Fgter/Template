@@ -1,0 +1,194 @@
+{
+  "1001": {
+    "ID": 1001,
+    "Name": "樱桃",
+    "Animation": [
+      "樱桃",
+      "樱桃",
+      "樱桃"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 2,
+    "HarvestId": 10001,
+    "HarvestCountMin": 6,
+    "HarvestCountMax": 10
+  },
+  "1002": {
+    "ID": 1002,
+    "Name": "橙子",
+    "Animation": [
+      "橙子",
+      "橙子",
+      "橙子"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 3,
+    "HarvestId": 10002,
+    "HarvestCountMin": 3,
+    "HarvestCountMax": 4
+  },
+  "1003": {
+    "ID": 1003,
+    "Name": "猕猴桃",
+    "Animation": [
+      "猕猴桃",
+      "猕猴桃",
+      "猕猴桃"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 2,
+    "HarvestId": 10003,
+    "HarvestCountMin": 4,
+    "HarvestCountMax": 5
+  },
+  "1004": {
+    "ID": 1004,
+    "Name": "苹果",
+    "Animation": [
+      "苹果",
+      "苹果",
+      "苹果"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 3,
+    "HarvestId": 10004,
+    "HarvestCountMin": 5,
+    "HarvestCountMax": 6
+  },
+  "1005": {
+    "ID": 1005,
+    "Name": "草莓",
+    "Animation": [
+      "草莓",
+      "草莓",
+      "草莓"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 4,
+    "HarvestId": 10005,
+    "HarvestCountMin": 6,
+    "HarvestCountMax": 10
+  },
+  "1006": {
+    "ID": 1006,
+    "Name": "菠萝",
+    "Animation": [
+      "菠萝",
+      "菠萝",
+      "菠萝"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 5,
+    "HarvestId": 10006,
+    "HarvestCountMin": 3,
+    "HarvestCountMax": 4
+  },
+  "1007": {
+    "ID": 1007,
+    "Name": "西瓜",
+    "Animation": [
+      "西瓜",
+      "西瓜",
+      "西瓜"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 6,
+    "HarvestId": 10007,
+    "HarvestCountMin": 1,
+    "HarvestCountMax": 3
+  },
+  "1008": {
+    "ID": 1008,
+    "Name": "香蕉",
+    "Animation": [
+      "香蕉",
+      "香蕉",
+      "香蕉"
+    ],
+    "StagesName": [
+      "发芽",
+      "开花",
+      "成熟"
+    ],
+    "GrowthPercentPort": [
+      0,
+      0.4,
+      1
+    ],
+    "MatureTime": 1.0,
+    "SeasonCount": 7,
+    "HarvestId": 10008,
+    "HarvestCountMin": 5,
+    "HarvestCountMax": 8
+  }
+}

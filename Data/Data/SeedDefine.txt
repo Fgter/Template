@@ -1,0 +1,74 @@
+{
+  "1": {
+    "ID": 1,
+    "Name": "樱桃种子",
+    "Description": "一颗樱桃核",
+    "Icon": "樱桃",
+    "TargetPlant": 1001,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "2": {
+    "ID": 2,
+    "Name": "橙子种子",
+    "Description": "一粒橙子种子",
+    "Icon": "橙子",
+    "TargetPlant": 1002,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "3": {
+    "ID": 3,
+    "Name": "猕猴桃种子",
+    "Description": "一个猕猴桃种子",
+    "Icon": "猕猴桃",
+    "TargetPlant": 1003,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "4": {
+    "ID": 4,
+    "Name": "苹果种子",
+    "Description": "一颗苹果核",
+    "Icon": "苹果",
+    "TargetPlant": 1004,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "5": {
+    "ID": 5,
+    "Name": "草莓种子",
+    "Description": "一颗草莓种子",
+    "Icon": "草莓",
+    "TargetPlant": 1005,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "6": {
+    "ID": 6,
+    "Name": "菠萝种子",
+    "Description": "一颗菠萝种子",
+    "Icon": "菠萝",
+    "TargetPlant": 1006,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "7": {
+    "ID": 7,
+    "Name": "西瓜种子",
+    "Description": "一颗西瓜种子",
+    "Icon": "西瓜",
+    "TargetPlant": 1007,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  },
+  "8": {
+    "ID": 8,
+    "Name": "香蕉种子",
+    "Description": "一颗香蕉种子",
+    "Icon": "香蕉",
+    "TargetPlant": 1008,
+    "UnlockLevel": 0,
+    "TradingPrice": 1
+  }
+}
