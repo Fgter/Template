@@ -33,9 +33,9 @@ public class Storage : IUtility
             return default;
     }
 
-    public void RemoveSave<T>()
+    public void RemoveSave<T>(string fileName = null)
     {
-        string path = Path.Combine(dataPath, nameof(T));
+        string path = Path.Combine(dataPath, typeof(T).ToString() + fileName);
         if (File.Exists(path))
         {
             File.Delete(path);

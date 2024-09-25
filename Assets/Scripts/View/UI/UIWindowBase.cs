@@ -18,7 +18,7 @@ public class UIWindowBase : MonoBehaviour,IController
         No
     }
     /// <summary>
-    /// 每次启动UI的时候执行一次
+    /// 每次显示UI的时候都会执行一次
     /// </summary>
     /// <param name="showData"></param>
     public virtual void OnShow(IUIData showData)
