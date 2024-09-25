@@ -1220,6 +1220,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &736958145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 736958146}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &736958146
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736958145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1131864265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,10 +1756,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef42d0c36607f364b900331b4e1666d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantPrefab: {fileID: 3770376532140553055, guid: 625d2e54672a7af498058b2bd896b633, type: 3}
-  soilPrefab: {fileID: 6926883730499078853, guid: 5b5d9891755bf8942a475a370fa3f7c9, type: 3}
-  normalSoilSprite: {fileID: 0}
-  lockSoilSprite: {fileID: 0}
 --- !u!4 &1759922849
 Transform:
   m_ObjectHideFlags: 0
@@ -2600,9 +2627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a56e8b65823514e873310eea5a09a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 8150127076175629766}
-  _back: {fileID: 6390075251217427885}
-  image: {fileID: 3167884657980424921}
 --- !u!1 &6390075250739889235
 GameObject:
   m_ObjectHideFlags: 0
