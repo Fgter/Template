@@ -30,9 +30,7 @@ public class UIManager : Singleton<UIManager>
     }
     public UIManager()
     {
-        UIResources[typeof(UIBag)] = new UIElement { AssetName = PathConfig.UIPath + "Bag/UIBag" };
         UIResources[typeof(UIMessageTip)] = new UIElement { AssetName = PathConfig.UIPath + "UIMessageTip" };
-        UIResources[typeof(UIShop)] = new UIElement { AssetName = PathConfig.UIPath + "Shop/UIShop" };
         UIResources[typeof(UITip)] = new UIElement { AssetName = PathConfig.UIPath + "UITip" };
 
     }

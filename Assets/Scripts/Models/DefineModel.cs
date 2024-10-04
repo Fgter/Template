@@ -14,7 +14,7 @@ namespace Models
         public const string DataPath = "Data/Data/";
         protected override void OnInit()
         {
-            Load();
+            //Load();
         }
         public Dictionary<Type, dynamic> allDefines = new Dictionary<Type, dynamic>();
         public Dictionary<int, IIconItemDefine> iconItemDefines = new Dictionary<int, IIconItemDefine>();

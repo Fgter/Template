@@ -14,12 +14,12 @@ public class PirateBomb : Architecture<PirateBomb>
         //Model
         RegisterModel(new DefineModel());
         RegisterModel(new TimeModel());
-        RegisterModel(new ItemModel());
         RegisterModel(new PlayerModel());
-        RegisterModel(new ShopModel());
+        RegisterModel(new EnemyModel());
+        RegisterModel(new RootModel());
         //System
         RegisterSystem(new TimeSystem());
-        RegisterSystem(new ShopSystem());
+        RegisterSystem(new GameSystem());
 
         //GiveIntinalMaterials();
     }
