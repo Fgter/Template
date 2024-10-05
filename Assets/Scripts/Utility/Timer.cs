@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using QFramework;
 using System;
-class Timer : IUtility
+public class Timer : IUtility
 {
     float timer;
     float time;
@@ -14,7 +14,7 @@ class Timer : IUtility
         CommonMono.AddUpdateAction(Update);
     }
 
-    public void Time(float time, Action callback, bool repeat = false)
+    public void Delay(float time, Action callback, bool repeat = false)
     {
         this.time = time;
         timer = 0;
@@ -34,7 +34,7 @@ class Timer : IUtility
             callback?.Invoke();
             active = false;
             if (repeat)
-                this.Time(time, callback, true);
+                this.Delay(time, callback, true);
         }
     }
 }

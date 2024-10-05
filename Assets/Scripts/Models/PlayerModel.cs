@@ -2,9 +2,13 @@
 
 class PlayerModel : AbstractModel
 {
-    public BindableProperty<int> hp { get; set; } = new BindableProperty<int>();
+    public float maxHp { get; set; }
+    public BindableProperty<float> hp { get; set; } = new BindableProperty<float>();
+    public int attack { get; set; }
     protected override void OnInit()
     {
-        hp.SetValueWithoutEvent(3);
+        maxHp = 30;
+        hp.SetValueWithoutEvent(maxHp);
+        attack = 10;
     }
 }

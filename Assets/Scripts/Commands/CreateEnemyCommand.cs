@@ -13,9 +13,11 @@ class CreateEnemyCommand : AbstractCommand
     {
         model = this.GetModel<EnemyModel>();
         EnemyData data = new EnemyData();
-        data.Init();
+       
         GameObject go = GameObject.Instantiate(prefab);
-        go.GetComponent<EnemyMono>().data = data;
+        EnemyMonoBase mono = go.GetComponent<EnemyMonoBase>();
+        data.Init(this.SendQuery(new GetDefineQuery<EnemyDefine>(mono.defineId)));
+        mono.data = data;
         go.transform.position = RandomPos();
         data.transform = go.transform;
         model.enemiesList.Add(data);

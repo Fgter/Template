@@ -1,5 +1,5 @@
 public struct RootAttackedEvent
 {
-    public int changeValue;
-    public int currentValue;
+    public float changeValue;
+    public float currentValue;
 }

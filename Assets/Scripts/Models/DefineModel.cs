@@ -14,33 +14,18 @@ namespace Models
         public const string DataPath = "Data/Data/";
         protected override void OnInit()
         {
-            //Load();
+            Load();
         }
         public Dictionary<Type, dynamic> allDefines = new Dictionary<Type, dynamic>();
         public Dictionary<int, IIconItemDefine> iconItemDefines = new Dictionary<int, IIconItemDefine>();
 
-        Dictionary<int, SeedDefine> SeedDefines = new Dictionary<int, SeedDefine>();
-        Dictionary<int, HarvestDefine> HarvestDefines = new Dictionary<int, HarvestDefine>();
-        Dictionary<int, FoodDefine> FoodDefines = new Dictionary<int, FoodDefine>();
-        Dictionary<int, ShopDefine> ShopDefines = new Dictionary<int, ShopDefine>();
-        Dictionary<int, Dictionary<int, ShopItemDefine>> ShopItemDefines = new Dictionary<int, Dictionary<int, ShopItemDefine>>();
+        Dictionary<int, EnemyDefine> enemyDefines = new Dictionary<int, EnemyDefine>();
+
 
         void Load()
         {
-            string json = File.ReadAllText(DataPath + "SeedDefine.txt");
-            SeedDefines = JsonConvert.DeserializeObject<Dictionary<int, SeedDefine>>(json);
-
-            json = File.ReadAllText(DataPath + "HarvestDefine.txt");
-            HarvestDefines = JsonConvert.DeserializeObject<Dictionary<int, HarvestDefine>>(json);
-
-            json = File.ReadAllText(DataPath + "FoodDefine.txt");
-            FoodDefines = JsonConvert.DeserializeObject<Dictionary<int, FoodDefine>>(json);
-
-            json = File.ReadAllText(DataPath + "ShopDefine.txt");
-            ShopDefines = JsonConvert.DeserializeObject<Dictionary<int, ShopDefine>>(json);
-
-            json = File.ReadAllText(DataPath + "ShopItemDefine.txt");
-            ShopItemDefines = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, ShopItemDefine>>>(json);
+            string json = File.ReadAllText(DataPath + "EnemyDefine.txt");
+            enemyDefines = JsonConvert.DeserializeObject<Dictionary<int, EnemyDefine>>(json);
 
             CollectDefines();
         }

@@ -8,7 +8,7 @@ public class EnemyModel : AbstractModel
     public List<EnemyData> enemiesList = new List<EnemyData>();
     protected override void OnInit()
     {
-       
+
     }
 
     public Transform GetEnemyByDistance(Transform player)
@@ -16,18 +16,22 @@ public class EnemyModel : AbstractModel
         if (enemiesList.Count <= 0)
             return null;
         Transform result = enemiesList[0].transform;
-        float distance = (enemiesList[0].transform.position - player.position).sqrMagnitude;
-        foreach(var enemy in enemiesList)
+        float minDistance = (enemiesList[0].transform.position - player.position).sqrMagnitude;
+        foreach (var enemy in enemiesList)
         {
-            if ((enemy.transform.position - player.position).sqrMagnitude < distance)
+            float distance = (enemy.transform.position - player.position).sqrMagnitude;
+            if (distance < minDistance)
+            {
                 result = enemy.transform;
+                minDistance = (enemy.transform.position - player.position).sqrMagnitude;
+            }
         }
         return result;
     }
 
     public void RemoveEnemy(EnemyData data)
     {
-        if(enemiesList.Contains(data))
+        if (enemiesList.Contains(data))
             enemiesList.Remove(data);
     }
 }

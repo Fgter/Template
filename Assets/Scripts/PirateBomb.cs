@@ -20,6 +20,7 @@ public class PirateBomb : Architecture<PirateBomb>
         //System
         RegisterSystem(new TimeSystem());
         RegisterSystem(new GameSystem());
+        RegisterSystem(new RootSystem());
 
         //GiveIntinalMaterials();
     }

@@ -17,7 +17,7 @@ class AttackCommand : AbstractCommand
         Rigidbody2D rb = this.target.GetComponentInChildren<Rigidbody2D>();
         if (target != null)
         {
-            target.Hurt(1);
+            target.Hurt(value);
         }
         if (rb != null)
         {

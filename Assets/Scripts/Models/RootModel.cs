@@ -5,11 +5,17 @@ using QFramework;
 
 public class RootModel : AbstractModel
 {
-    public BindableProperty<int> hp { get; set; } = new BindableProperty<int>();
+
+    public float maxHp { get; set; }
+    public BindableProperty<float> hp { get; set; } = new BindableProperty<float>();
+    public BindableProperty<float> diameter { get; set; } = new BindableProperty<float>();//Ö±¾¶
+    public float radius { get => diameter.Value / 2; }//°ë¾¶
+
+    public List<ExtraRootData> extraRoots = new List<ExtraRootData>();
     protected override void OnInit()
     {
-        hp.SetValueWithoutEvent(3);
+        maxHp = 300;
+        hp.SetValueWithoutEvent(maxHp);
+        diameter.Value = 10;
     }
-
-   
 }

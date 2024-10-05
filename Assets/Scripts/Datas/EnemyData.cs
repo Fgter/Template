@@ -2,18 +2,21 @@ using System;
 using UnityEngine;
 public class EnemyData
 {
-    Action<int> EnemyHurtEvent;
+    Action<float> EnemyHurtEvent;
     Action EnemyDieEvent;
-    public int hp { get; private set; }
+    public float hp { get; private set; }
     public bool dead { get; private set; }
     public Transform transform { get; set; }
+    public EnemyDefine define { get; private set; }
 
-    public void Init()
+    public void Init(EnemyDefine define)
     {
-        hp = 3;
+        this.define = define;
+        hp = define.MaxHP;
+        
     }
 
-    public void Hurt(int damage)
+    public void Hurt(float damage)
     {
         hp = hp - damage > 0 ? hp - damage : 0;
         if (hp <= 0)
@@ -31,6 +34,6 @@ public class EnemyData
     }
     public void RegisterEnemyDieEvent(Action func) => EnemyDieEvent += func;
     public void UnRegisterEnemyDieEvent(Action func) => EnemyDieEvent -= func;
-    public void RegisterEnemyHurtEvent(Action<int> func) => EnemyHurtEvent += func;
-    public void UnRegisterEnemyHurtEvent(Action<int> func) => EnemyHurtEvent -= func;
+    public void RegisterEnemyHurtEvent(Action<float> func) => EnemyHurtEvent += func;
+    public void UnRegisterEnemyHurtEvent(Action<float> func) => EnemyHurtEvent -= func;
 }

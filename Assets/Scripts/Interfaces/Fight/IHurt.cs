@@ -1,4 +1,4 @@
 ﻿interface IHurt
 {
-    void Hurt(int damage);
+    void Hurt(float damage);
 }

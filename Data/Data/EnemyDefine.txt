@@ -1,0 +1,42 @@
+{
+  "1": {
+    "ID": 1,
+    "Name": "战士",
+    "Hp": 30.0,
+    "Speed": 1.0,
+    "AttackDistance": 1.2,
+    "StopDistance": 1.2,
+    "AttackCD": "1",
+    "FindEnemyLogic": 1
+  },
+  "2": {
+    "ID": 2,
+    "Name": "刺客",
+    "Hp": 20.0,
+    "Speed": 4.0,
+    "AttackDistance": 1.5,
+    "StopDistance": 1.5,
+    "AttackCD": "1",
+    "FindEnemyLogic": 2
+  },
+  "3": {
+    "ID": 3,
+    "Name": "射手",
+    "Hp": 10.0,
+    "Speed": 1.0,
+    "AttackDistance": 5.0,
+    "StopDistance": 4.0,
+    "AttackCD": "3",
+    "FindEnemyLogic": 1
+  },
+  "4": {
+    "ID": 4,
+    "Name": "投手",
+    "Hp": 10.0,
+    "Speed": 1.0,
+    "AttackDistance": 5.0,
+    "StopDistance": 5.0,
+    "AttackCD": "3",
+    "FindEnemyLogic": 2
+  }
+}
