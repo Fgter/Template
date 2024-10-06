@@ -24,8 +24,6 @@ public class GameSystem : AbstractSystem
 
     public void Restart()
     {
-        this.GetModel<RootModel>().hp.Value = 3;
-        this.GetModel<PlayerModel>().hp.Value = 30;
         this.GetModel<EnemyModel>().enemiesList.Clear();
         Time.timeScale = 1;
         SceneManager.LoadScene("Fgter");

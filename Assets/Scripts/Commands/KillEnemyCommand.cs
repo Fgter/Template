@@ -1,4 +1,5 @@
 ﻿using QFramework;
+using UnityEngine;
 class KillEnemyCommand : AbstractCommand
 {
     EnemyModel model;
@@ -11,5 +12,8 @@ class KillEnemyCommand : AbstractCommand
     {
         model = this.GetModel<EnemyModel>();
         model.RemoveEnemy(data);
+        GameObject prefab = ResLoader.Load<GameObject>("Prefabs/Gold");
+        GameObject go = GameObject.Instantiate(prefab);
+        go.transform.position = data.transform.position;
     }
 }

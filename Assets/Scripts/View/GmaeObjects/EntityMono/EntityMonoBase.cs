@@ -8,10 +8,10 @@ public class EntityMonoBase : MonoBehaviour, IHurt
     [SerializeField]
     protected Image hpBar;
 
-    Rigidbody2D rb;
-    Animator anim;
+    protected Rigidbody2D rb;
+    protected Animator anim;
 
-    private void Start()
+    protected virtual void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -22,7 +22,7 @@ public class EntityMonoBase : MonoBehaviour, IHurt
 
     }
 
-    public virtual void Hurt(float damage)
+    public virtual void Hurt(float damage, bool dir)
     {
        
     }

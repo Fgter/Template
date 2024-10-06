@@ -41,8 +41,8 @@ namespace Spine.Unity {
 	public static class SkeletonDataCompatibility {
 
 #if UNITY_EDITOR
-		static readonly int[][] compatibleBinaryVersions = { new[] { 4, 1, 0 } };
-		static readonly int[][] compatibleJsonVersions = { new[] { 4, 1, 0 } };
+		static readonly int[][] compatibleBinaryVersions = { new[] { 4, 2, 0 } };
+		static readonly int[][] compatibleJsonVersions = { new[] { 4, 2, 0 } };
 
 		static bool wasVersionDialogShown = false;
 		static readonly Regex jsonVersionRegex = new Regex(@"""spine""\s*:\s*""([^""]+)""", RegexOptions.CultureInvariant);
@@ -163,12 +163,6 @@ namespace Spine.Unity {
 
 		public static bool IsJsonFile (TextAsset file) {
 			byte[] content = file.bytes;
-
-			// check for binary skeleton version number string, starts after 8 byte hash
-			char majorVersionChar = compatibleBinaryVersions[0][0].ToString()[0];
-			if (content.Length > 10 && content[9] == majorVersionChar && content[10] == '.')
-				return false;
-
 			const int maxCharsToCheck = 256;
 			int numCharsToCheck = Math.Min(content.Length, maxCharsToCheck);
 			int i = 0;

@@ -21,6 +21,12 @@ public class EnemyArcher : EnemyMonoBase
         lineRenderer.gameObject.SetActive(false);
     }
 
+    protected override void Update()
+    {
+        FindTarget();
+        TryAttack();
+    }
+
     protected override void TryAttack()
     {
         if (distance > data.define.AttackDistance)
@@ -81,7 +87,7 @@ public class EnemyArcher : EnemyMonoBase
     {
         targetPos = target.position;
         lineRenderer.gameObject.SetActive(true);
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, shootPoint.position);
         lineRenderer.SetPosition(1, targetPos);
     }
 }

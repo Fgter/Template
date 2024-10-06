@@ -7,15 +7,16 @@ using UnityEngine.UI;
 public class PlayerMono : MonoSingleton<PlayerMono>, IController, IHurt
 {
     [SerializeField]
-    float moveSpeed;
-    [SerializeField]
     float attackDistance;
     [SerializeField]
     float attackCD;
     [SerializeField]
     Image hpBar;
+    [SerializeField]
+    Transform sprite;
 
     private Rigidbody2D rb;
+    Animator anim;
     Animator weaponAnim;
     Vector3 movement;
     EnemyModel enemyModel;
@@ -27,6 +28,7 @@ public class PlayerMono : MonoSingleton<PlayerMono>, IController, IHurt
 
     private void Start()
     {
+        anim = GetComponent<Animator>();
         enemyModel = this.GetModel<EnemyModel>();
         playerModel = this.GetModel<PlayerModel>();
         rb = GetComponent<Rigidbody2D>();
@@ -45,6 +47,7 @@ public class PlayerMono : MonoSingleton<PlayerMono>, IController, IHurt
         TryAttack();
     }
 
+    Vector3 left = new Vector3(-1, 1, 1);
     void Move()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -56,17 +59,41 @@ public class PlayerMono : MonoSingleton<PlayerMono>, IController, IHurt
         {
             movement.Normalize();
         }
-        transform.position += movement * moveSpeed * Time.deltaTime;
+        transform.position += movement * playerModel.speed * Time.deltaTime;
+
+        //animation
+        if (movement.sqrMagnitude > 0.1f)
+        {
+            if (!anim.GetBool("Move"))
+                anim.SetBool("Move", true);
+        }
+        else
+        {
+            if (anim.GetBool("Move"))
+                anim.SetBool("Move", false);
+        }
+        //×ªÏò
+        if(movement.x>0)
+        {
+            if (sprite.localScale.x < 0)
+                sprite.localScale = Vector3.one;
+        }
+        else if(movement.x < 0)
+        {
+            if (sprite.localScale.x > 0)
+                sprite.localScale = left;
+        }
     }
 
-    public void Hurt(float damage)
+    public void Hurt(float damage, bool dir)
     {
+        anim.SetTrigger("Hurt");
         this.SendCommand(new PlayerHurtCommand(damage));
     }
 
     void OnHurt(float currentHp)
     {
-        hpBar.fillAmount = currentHp / playerModel.maxHp;
+        hpBar.fillAmount = currentHp / playerModel.maxHp.Value;
     }
 
     void TryAttack()

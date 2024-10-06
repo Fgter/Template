@@ -18,9 +18,27 @@ public class RootSystem : AbstractSystem
             return true;
         foreach (var root in model.extraRoots)
         {
-            if (Vector3.Distance(root.postion, playerPos) <= root.radius)
+            if (Vector3.Distance(root.transform.position, playerPos) <= root.radius)
                 return true;
         }
         return false;
+    }
+
+    public Transform GetNearestRoot(Transform ts)
+    {
+        Transform result = RootMono.instance.transform;
+        float minDistance = (ts.transform.position - result.position).sqrMagnitude;
+        List<ExtraRootData> roots = model.extraRoots;
+        foreach(var root in roots)
+        {
+            float distance = (ts.transform.position - root.transform.position).sqrMagnitude;
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                if (root.transform != null)
+                    result = root.transform;
+            }
+        }
+        return result;
     }
 }

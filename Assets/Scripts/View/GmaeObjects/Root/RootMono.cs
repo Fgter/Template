@@ -4,8 +4,9 @@ using UnityEngine;
 using QFramework;
 using System;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class RootMono : MonoSingleton<RootMono>, IController,IHurt
+public class RootMono : MonoSingleton<RootMono>, IController,IHurt,IPointerClickHandler
 {
     RootModel model;
     RootSystem system;
@@ -16,10 +17,14 @@ public class RootMono : MonoSingleton<RootMono>, IController,IHurt
     Transform safeArea;
     [SerializeField]
     Transform unsafeArea;
+    [SerializeField]
+    UITreeUp uiUp;
 
+    Animator anim;
     PlayerHurtCommand playerHurtCommand;
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         model = this.GetModel<RootModel>();
         system = this.GetSystem<RootSystem>();
         model.hp.Register(OnHurt).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -35,6 +40,7 @@ public class RootMono : MonoSingleton<RootMono>, IController,IHurt
     private void OnHurt(float currentHp)
     {
         hpBar.fillAmount = currentHp / model.maxHp;
+
     }
 
 
@@ -43,8 +49,12 @@ public class RootMono : MonoSingleton<RootMono>, IController,IHurt
         return PirateBomb.Interface;
     }
 
-    public void Hurt(float damage)
+    public void Hurt(float damage,bool dir)
     {
+        if (dir)
+            anim.SetTrigger("HurtRight");
+        else
+            anim.SetTrigger("HurtLeft");
         this.SendCommand(new RootAttackedCommand());
     }
 
@@ -57,5 +67,10 @@ public class RootMono : MonoSingleton<RootMono>, IController,IHurt
             this.SendCommand(playerHurtCommand);
         }
             
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        uiUp.gameObject.SetActive(true);
     }
 }

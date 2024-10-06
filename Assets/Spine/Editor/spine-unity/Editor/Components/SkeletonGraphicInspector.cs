@@ -62,6 +62,7 @@ namespace Spine.Unity.Editor {
 		SerializedProperty skeletonDataAsset, initialSkinName;
 		SerializedProperty startingAnimation, startingLoop, timeScale, freeze,
 			updateTiming, updateWhenInvisible, unscaledTime, tintBlack, layoutScaleMode, editReferenceRect;
+		SerializedProperty physicsPositionInheritanceFactor, physicsRotationInheritanceFactor, physicsMovementRelativeTo;
 		SerializedProperty initialFlipX, initialFlipY;
 		SerializedProperty meshGeneratorSettings;
 		SerializedProperty allowMultipleCanvasRenderers, separatorSlotNames, enableSeparatorSlots,
@@ -72,6 +73,22 @@ namespace Spine.Unity.Editor {
 			"If enabled, AnimationState uses unscaled game time (Time.unscaledDeltaTime), " +
 				"running animations independent of e.g. game pause (Time.timeScale). " +
 				"Instance SkeletonAnimation.timeScale will still be applied.");
+		readonly GUIContent PhysicsPositionInheritanceFactorLabel = new GUIContent("Position",
+			"When set to non-zero, Transform position movement in X and Y direction is applied to skeleton " +
+			"PhysicsConstraints, multiplied by these " +
+			"\nX and Y scale factors to the right. Typical (X,Y) values are " +
+			"\n(1,1) to apply XY movement normally, " +
+			"\n(2,2) to apply movement with double intensity, " +
+			"\n(1,0) to apply only horizontal movement, or" +
+			"\n(0,0) to not apply any Transform position movement at all.");
+		readonly GUIContent PhysicsRotationInheritanceFactorLabel = new GUIContent("Rotation",
+			"When set to non-zero, Transform rotation movement is applied to skeleton PhysicsConstraints, " +
+			"multiplied by this scale factor to the right. Typical values are " +
+			"\n1 to apply movement normally, " +
+			"\n2 to apply movement with double intensity, or " +
+			"\n0 to not apply any Transform rotation movement at all.");
+		readonly GUIContent PhysicsMovementRelativeToLabel = new GUIContent("Movement relative to",
+			"Reference transform relative to which physics movement will be calculated, or null to use world location.");
 
 		SkeletonGraphic thisSkeletonGraphic;
 		protected bool isInspectingPrefab;
@@ -136,6 +153,9 @@ namespace Spine.Unity.Editor {
 			updateWhenInvisible = so.FindProperty("updateWhenInvisible");
 			layoutScaleMode = so.FindProperty("layoutScaleMode");
 			editReferenceRect = so.FindProperty("editReferenceRect");
+			physicsPositionInheritanceFactor = so.FindProperty("physicsPositionInheritanceFactor");
+			physicsRotationInheritanceFactor = so.FindProperty("physicsRotationInheritanceFactor");
+			physicsMovementRelativeTo = so.FindProperty("physicsMovementRelativeTo");
 
 			meshGeneratorSettings = so.FindProperty("meshGenerator").FindPropertyRelative("settings");
 			meshGeneratorSettings.isExpanded = SkeletonRendererInspector.advancedFoldout;
@@ -307,6 +327,21 @@ namespace Spine.Unity.Editor {
 
 					EditorGUILayout.Space();
 					SeparatorsField(separatorSlotNames, enableSeparatorSlots, updateSeparatorPartLocation, updateSeparatorPartScale);
+
+					EditorGUILayout.Space();
+					using (new SpineInspectorUtility.LabelWidthScope()) {
+						EditorGUILayout.LabelField(SpineInspectorUtility.TempContent("Physics Inheritance", SpineEditorUtilities.Icons.constraintPhysics), EditorStyles.boldLabel);
+
+						using (new GUILayout.HorizontalScope()) {
+							EditorGUILayout.LabelField(PhysicsPositionInheritanceFactorLabel, GUILayout.Width(EditorGUIUtility.labelWidth));
+							int savedIndentLevel = EditorGUI.indentLevel;
+							EditorGUI.indentLevel = 0;
+							EditorGUILayout.PropertyField(physicsPositionInheritanceFactor, GUIContent.none, GUILayout.MinWidth(60));
+							EditorGUI.indentLevel = savedIndentLevel;
+						}
+						EditorGUILayout.PropertyField(physicsRotationInheritanceFactor, PhysicsRotationInheritanceFactorLabel);
+						EditorGUILayout.PropertyField(physicsMovementRelativeTo, PhysicsMovementRelativeToLabel);
+					}
 				}
 			}
 
@@ -529,10 +564,12 @@ namespace Spine.Unity.Editor {
 			graphic.MeshGenerator.settings.zSpacing = SpineEditorUtilities.Preferences.defaultZSpacing;
 
 			graphic.startingLoop = SpineEditorUtilities.Preferences.defaultInstantiateLoop;
+			graphic.PhysicsPositionInheritanceFactor = SpineEditorUtilities.Preferences.defaultPhysicsPositionInheritance;
+			graphic.PhysicsRotationInheritanceFactor = SpineEditorUtilities.Preferences.defaultPhysicsRotationInheritance;
 			graphic.Initialize(false);
 			if (skin != null) graphic.Skeleton.SetSkin(skin);
 			graphic.initialSkinName = skin.Name;
-			graphic.Skeleton.UpdateWorldTransform();
+			graphic.Skeleton.UpdateWorldTransform(Skeleton.Physics.Update);
 			graphic.UpdateMesh();
 			return graphic;
 		}
@@ -553,29 +590,41 @@ namespace Spine.Unity.Editor {
 		}
 
 		public static Material DefaultSkeletonGraphicMaterial {
-			get { return FirstMaterialWithName("SkeletonGraphicDefault"); }
+			get { return MaterialWithName("SkeletonGraphicDefault"); }
 		}
 
 		public static Material DefaultSkeletonGraphicAdditiveMaterial {
-			get { return FirstMaterialWithName("SkeletonGraphicAdditive"); }
+			get { return MaterialWithName("SkeletonGraphicAdditive"); }
 		}
 
 		public static Material DefaultSkeletonGraphicMultiplyMaterial {
-			get { return FirstMaterialWithName("SkeletonGraphicMultiply"); }
+			get { return MaterialWithName("SkeletonGraphicMultiply"); }
 		}
 
 		public static Material DefaultSkeletonGraphicScreenMaterial {
-			get { return FirstMaterialWithName("SkeletonGraphicScreen"); }
+			get { return MaterialWithName("SkeletonGraphicScreen"); }
 		}
 
-		protected static Material FirstMaterialWithName (string name) {
+		protected static Material MaterialWithName (string name) {
 			string[] guids = AssetDatabase.FindAssets(name + " t:material");
 			if (guids.Length <= 0) return null;
 
-			string firstAssetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
-			if (string.IsNullOrEmpty(firstAssetPath)) return null;
+			int closestNameDistance = int.MaxValue;
+			int closestNameIndex = 0;
+			for (int i = 0; i < guids.Length; ++i) {
+				string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);
+				string assetName = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+				int distance = string.CompareOrdinal(assetName, name);
+				if (distance < closestNameDistance) {
+					closestNameDistance = distance;
+					closestNameIndex = i;
+				}
+			}
 
-			Material firstMaterial = AssetDatabase.LoadAssetAtPath<Material>(firstAssetPath);
+			string foundAssetPath = AssetDatabase.GUIDToAssetPath(guids[closestNameIndex]);
+			if (string.IsNullOrEmpty(foundAssetPath)) return null;
+
+			Material firstMaterial = AssetDatabase.LoadAssetAtPath<Material>(foundAssetPath);
 			return firstMaterial;
 		}
 

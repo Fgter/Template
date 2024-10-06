@@ -11,6 +11,8 @@ public class EnemyMonoBase : EntityMonoBase, IController
 
     [SerializeField]
     int _defineId;
+    [SerializeField]
+    Transform sprite;
 
     protected Animator weaponAnim;
     protected Transform target;
@@ -18,12 +20,18 @@ public class EnemyMonoBase : EntityMonoBase, IController
     protected float distance;
     protected Timer timer;
     protected bool canAttack = true;
+    protected RootSystem rootSystem;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
+        rootSystem = this.GetSystem<RootSystem>();
         weapon = GetComponentInChildren<Weapon>();
-        weapon.owner = transform;
-        weaponAnim = weapon.GetComponentInChildren<Animator>();
+        if (weapon != null)
+        {
+            weapon.owner = transform;
+            weaponAnim = weapon.GetComponentInChildren<Animator>();
+        }
         timer = new Timer();
         data.RegisterEnemyDieEvent(OnDie);
         data.RegisterEnemyHurtEvent(OnHurt);
@@ -41,7 +49,7 @@ public class EnemyMonoBase : EntityMonoBase, IController
         Move();
     }
 
-    public override void Hurt(float damage)
+    public override void Hurt(float damage, bool dir)
     {
         data.Hurt(damage);
     }
@@ -49,6 +57,7 @@ public class EnemyMonoBase : EntityMonoBase, IController
     protected override void OnHurt(float damage)
     {
         hpBar.fillAmount = data.hp / data.define.MaxHP;
+        anim.SetTrigger("Hurt");
     }
 
     protected override void OnDie()
@@ -61,8 +70,24 @@ public class EnemyMonoBase : EntityMonoBase, IController
 
     protected virtual void Move()
     {
+        if (target == null)
+            return;
         if (distance > data.define.StopDistance)
+        {
             transform.position += (target.position - transform.position).normalized * data.define.Speed * Time.deltaTime;
+            //anim
+            if (!anim.GetBool("Move"))
+                anim.SetBool("Move", true);
+        }
+        else
+        {
+            //anim
+            if (anim.GetBool("Move"))
+                anim.SetBool("Move", false);
+        }
+        //×ªÏò
+        float dir = target.position.x - transform.position.x;
+        sprite.localScale = dir > 0 ? Vector3.one : new Vector3(-1, 1, 1);
     }
     protected override void FindTarget()
     {
@@ -72,7 +97,7 @@ public class EnemyMonoBase : EntityMonoBase, IController
                 if ((PlayerMono.instance.transform.position - transform.position).magnitude <= 4)
                     target = PlayerMono.instance.transform;
                 else
-                    target = RootMono.instance.transform;
+                    target = rootSystem.GetNearestRoot(transform);
                 break;
             case 2:
                 target = PlayerMono.instance.transform;

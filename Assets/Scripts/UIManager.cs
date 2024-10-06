@@ -32,6 +32,7 @@ public class UIManager : Singleton<UIManager>
     {
         UIResources[typeof(UIMessageTip)] = new UIElement { AssetName = PathConfig.UIPath + "UIMessageTip" };
         UIResources[typeof(UITip)] = new UIElement { AssetName = PathConfig.UIPath + "UITip" };
+        UIResources[typeof(UIPlayerUp)] = new UIElement { AssetName = PathConfig.UIPath + "UIPlayerUp" };
 
     }
     public T Show<T>(IUIData data) where T : UIWindowBase

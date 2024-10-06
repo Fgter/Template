@@ -40,6 +40,16 @@ public class Test : ViewController, IController
         this.SendCommand(new CreateEnemyCommand(enemyThrower));
     }
 
+    public void AddGold()
+    {
+        this.SendCommand(new IncreaseGoldCommand(100));
+    }
+
+    public void OpenUIPlayerUp()
+    {
+        UIManager.instance.Show<UIPlayerUp>(null);
+    }
+
     private void Start()
     {
         this.RegisterEvent<GameEnd>(OnGameEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -52,12 +62,36 @@ public class Test : ViewController, IController
 
     public void Restart()
     {
+        ResetPlayer();
+        ResetMap();
         this.GetSystem<GameSystem>().Restart();
+    }
+
+    public void ResetPlayer()
+    {
+        this.GetModel<PlayerModel>().attack = 10;
+        this.GetModel<PlayerModel>().maxHp.Value = 30;
+        this.GetModel<PlayerModel>().hp.Value = 30;
+        this.GetModel<PlayerModel>().speed = 5;
+    }
+
+    public void ResetMap()
+    {
+        var model = this.GetModel<RootModel>();
+        foreach (var root in model.extraRoots)
+        {
+            Destroy(root.transform.gameObject);
+        }
+        model.extraRoots.Clear();
+        model.diameter.Value = 10;
+        model.maxHp = 3;
+        model.hp.Value = 3;
+
     }
 
     public void RecoverHp()
     {
-        this.GetModel<PlayerModel>().hp.Value = 30;
-        this.GetModel<RootModel>().hp.Value = 3;
+        this.GetModel<PlayerModel>().hp.Value = this.GetModel<PlayerModel>().maxHp.Value;
+        this.GetModel<RootModel>().hp.Value = this.GetModel<RootModel>().maxHp;
     }
 }

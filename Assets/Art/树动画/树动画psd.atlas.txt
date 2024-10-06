@@ -1,0 +1,6 @@
+树动画psd.png
+size:432,448
+filter:Linear,Linear
+pma:true
+1
+bounds:2,2,428,444

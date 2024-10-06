@@ -15,9 +15,10 @@ class AttackCommand : AbstractCommand
     {
         IHurt target = this.target.GetComponent<IHurt>();
         Rigidbody2D rb = this.target.GetComponentInChildren<Rigidbody2D>();
+        bool hDir = this.target.position.x - self.position.x > 0 ? true : false;
         if (target != null)
         {
-            target.Hurt(value);
+            target.Hurt(value,hDir);
         }
         if (rb != null)
         {
