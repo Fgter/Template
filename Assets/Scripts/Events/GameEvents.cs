@@ -1,1 +1,2 @@
-﻿struct GameEnd { }
+﻿struct GameEndEvent { }
+struct GameWinEvent { }

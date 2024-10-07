@@ -20,12 +20,16 @@ namespace Models
         public Dictionary<int, IIconItemDefine> iconItemDefines = new Dictionary<int, IIconItemDefine>();
 
         Dictionary<int, EnemyDefine> enemyDefines = new Dictionary<int, EnemyDefine>();
+        Dictionary<int, SpawnRuleDefine> spawnRuleDefines = new Dictionary<int, SpawnRuleDefine>();
 
 
         void Load()
         {
             string json = File.ReadAllText(DataPath + "EnemyDefine.txt");
             enemyDefines = JsonConvert.DeserializeObject<Dictionary<int, EnemyDefine>>(json);
+
+            json = File.ReadAllText(DataPath + "SpawnRuleDefine.txt");
+            spawnRuleDefines = JsonConvert.DeserializeObject<Dictionary<int, SpawnRuleDefine>>(json);
 
             CollectDefines();
         }

@@ -1,0 +1,47 @@
+{
+  "1": {
+    "Round": 1,
+    "Enemy1Count": 1,
+    "Enemy2Count": 1,
+    "Enemy3Count": 1,
+    "Enemy4Count": 1,
+    "SpawnInterval": 2.0,
+    "EachSpawnCount": 1
+  },
+  "2": {
+    "Round": 2,
+    "Enemy1Count": 1,
+    "Enemy2Count": 0,
+    "Enemy3Count": 0,
+    "Enemy4Count": 0,
+    "SpawnInterval": 1.0,
+    "EachSpawnCount": 1
+  },
+  "3": {
+    "Round": 3,
+    "Enemy1Count": 0,
+    "Enemy2Count": 1,
+    "Enemy3Count": 0,
+    "Enemy4Count": 0,
+    "SpawnInterval": 1.0,
+    "EachSpawnCount": 1
+  },
+  "4": {
+    "Round": 4,
+    "Enemy1Count": 0,
+    "Enemy2Count": 0,
+    "Enemy3Count": 1,
+    "Enemy4Count": 0,
+    "SpawnInterval": 1.0,
+    "EachSpawnCount": 1
+  },
+  "5": {
+    "Round": 5,
+    "Enemy1Count": 0,
+    "Enemy2Count": 0,
+    "Enemy3Count": 0,
+    "Enemy4Count": 1,
+    "SpawnInterval": 1.0,
+    "EachSpawnCount": 1
+  }
+}

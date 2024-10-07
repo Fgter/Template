@@ -16,7 +16,10 @@ public class Test : ViewController, IController
     public GameObject enemyAssassin;
     public GameObject enemyArcher;
     public GameObject enemyThrower;
+
     public GameObject gameEndPanel;
+    public GameObject gameWinPanel;
+    public GameObject gmPanel;
     public IArchitecture GetArchitecture()
     {
         return PirateBomb.Interface;
@@ -52,19 +55,31 @@ public class Test : ViewController, IController
 
     private void Start()
     {
-        this.RegisterEvent<GameEnd>(OnGameEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<GameEndEvent>(OnGameEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
+        this.RegisterEvent<GameWinEvent>(OnGameWin).UnRegisterWhenGameObjectDestroyed(gameObject);
     }
 
-    private void OnGameEnd(GameEnd obj)
+    private void OnGameEnd(GameEndEvent obj)
     {
         gameEndPanel.SetActive(true);
+    }
+
+    private void OnGameWin(GameWinEvent obj)
+    {
+        gameWinPanel.SetActive(true);
     }
 
     public void Restart()
     {
         ResetPlayer();
         ResetMap();
+        ResetEnemySpawn();
         this.GetSystem<GameSystem>().Restart();
+    }
+
+    void ResetEnemySpawn()
+    {
+        this.GetSystem<EnemySpawnSystem>().ResetParams();
     }
 
     public void ResetPlayer()
@@ -93,5 +108,18 @@ public class Test : ViewController, IController
     {
         this.GetModel<PlayerModel>().hp.Value = this.GetModel<PlayerModel>().maxHp.Value;
         this.GetModel<RootModel>().hp.Value = this.GetModel<RootModel>().maxHp;
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            gmPanel.SetActive(!gmPanel.activeSelf);
+        }
     }
 }

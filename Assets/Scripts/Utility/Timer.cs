@@ -3,8 +3,9 @@ using QFramework;
 using System;
 public class Timer : IUtility
 {
+    public float time { get => timer; }
     float timer;
-    float time;
+    float _time;
     bool active;
     bool repeat;
 
@@ -16,7 +17,7 @@ public class Timer : IUtility
 
     public void Delay(float time, Action callback, bool repeat = false)
     {
-        this.time = time;
+        this._time = time;
         timer = 0;
         this.callback = callback;
         this.repeat = repeat;
@@ -29,12 +30,12 @@ public class Timer : IUtility
             return;
         timer += UnityEngine.Time.deltaTime;
 
-        if (timer >= time)
+        if (timer >= _time)
         {
             callback?.Invoke();
             active = false;
             if (repeat)
-                this.Delay(time, callback, true);
+                this.Delay(_time, callback, true);
         }
     }
 }

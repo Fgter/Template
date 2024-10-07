@@ -21,9 +21,13 @@ class UIPlayerUp : UIWindowBase
         btnAttackUp.onClick.AddListener(AttackUp);
         btnSpeedUp.onClick.AddListener(SpeedUp);
         btnMaxHpUp.onClick.AddListener(MaxHpUp);
-        btnClose.onClick.AddListener(() => CloseNo());
+        btnClose.onClick.AddListener(() => Close());
         gold.text = this.GetModel<PlayerModel>().gold.Value.ToString();
         this.GetModel<PlayerModel>().gold.Register(OnGoldChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+    }
+    private void OnEnable()
+    {
+        Time.timeScale = 0;
     }
 
     private void MaxHpUp()
@@ -53,5 +57,11 @@ class UIPlayerUp : UIWindowBase
     private void OnGoldChanged(int obj)
     {
         gold.text = obj.ToString();
+    }
+
+    public void Close()
+    {
+        this.CloseNo();
+        Time.timeScale = 1;
     }
 }

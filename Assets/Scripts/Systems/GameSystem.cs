@@ -15,7 +15,7 @@ public class GameSystem : AbstractSystem
     {
         if (value <= 0)
         {
-            this.SendEvent(new GameEnd());
+            this.SendEvent(new GameEndEvent());
             Time.timeScale = 0;
         }
     }

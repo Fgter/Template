@@ -15,5 +15,6 @@ class KillEnemyCommand : AbstractCommand
         GameObject prefab = ResLoader.Load<GameObject>("Prefabs/Gold");
         GameObject go = GameObject.Instantiate(prefab);
         go.transform.position = data.transform.position;
+        this.SendEvent(new EnemyDieEvent());
     }
 }

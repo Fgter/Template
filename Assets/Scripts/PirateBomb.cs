@@ -21,6 +21,7 @@ public class PirateBomb : Architecture<PirateBomb>
         RegisterSystem(new TimeSystem());
         RegisterSystem(new GameSystem());
         RegisterSystem(new RootSystem());
+        RegisterSystem(new EnemySpawnSystem());
 
         //GiveIntinalMaterials();
     }
