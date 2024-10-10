@@ -23,32 +23,32 @@ public class UIBag : UIWindowBase
     public override void OnShow(IUIData showData)
     {
         btnGroup.ActiveInitialSelectedBtn();
-        RefreshHarvest();
+        //RefreshHarvest();
     }
 
-    public void RefreshHarvest()
-    {
-        Refresh<HarvestItem>();
-        currentItemType = typeof(HarvestItem);
-    }
+    //public void RefreshHarvest()
+    //{
+    //    Refresh<HarvestItem>();
+    //    currentItemType = typeof(HarvestItem);
+    //}
 
-    public void RefreshSeed()
-    {
-        Refresh<SeedItem>();
-        currentItemType = typeof(SeedItem);
-    }
+    //public void RefreshSeed()
+    //{
+    //    Refresh<SeedItem>();
+    //    currentItemType = typeof(SeedItem);
+    //}
 
-    public void RefreshFood()
-    {
-        Refresh<FoodItem>();
-        currentItemType = typeof(FoodItem);
-    }
+    //public void RefreshFood()
+    //{
+    //    Refresh<FoodItem>();
+    //    currentItemType = typeof(FoodItem);
+    //}
 
-    public void RefreshSpecialty()
-    {
-        Refresh<SpecialtyItem>();
-        currentItemType = typeof(SpecialtyItem);
-    }
+    //public void RefreshSpecialty()
+    //{
+    //    Refresh<SpecialtyItem>();
+    //    currentItemType = typeof(SpecialtyItem);
+    //}
 
     void Refresh<T>() where T : Item
     {

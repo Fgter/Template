@@ -17,8 +17,8 @@ public class ResLoader
         return Load<Sprite>(PathConfig.SpritePath + spriteName);
     }
 
-    public static Sprite[] LoadSpriteAnimation(string spriteName)
+    public static GameObject LoadPrefab(string path)
     {
-        return LoadAll<Sprite>(PathConfig.AnimationPath + spriteName);
+        return Load<GameObject>(PathConfig.PrefabPath + path);
     }
 }

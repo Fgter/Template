@@ -4,15 +4,11 @@ public class PathConfig
     public const string SavePath = "/Saves";
     //Resources
     public const string UIPath="Prefabs/UI/";
-    public const string AnimationPath = "Animations/";
     public const string SpritePath = "Sprites/";
-    public const string PrefabPath = "Prefabs/SystemGameObjects";
+    public const string PrefabPath = "Prefabs/";
 
 
 
 
-    //¾‗Ìו
-    //Planting
-    public const string SoilSpritePath = "Sprites/Soil";
-    public const string lockSoilSpritePath = "Sprites/LockSoil";
+    
 }
