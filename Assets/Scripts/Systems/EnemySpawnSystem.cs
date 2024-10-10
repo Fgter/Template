@@ -52,7 +52,13 @@ public class EnemySpawnSystem : AbstractSystem
                 }
             }
             else
-                result = currentEnemies;
+            {
+                foreach(var enemy in currentEnemies)
+                {
+                    result.Add(enemy);
+                }
+                currentEnemies.Clear();
+            }
         }
         return result;
     }
