@@ -23,14 +23,14 @@ public class PlayerMono : MonoSingleton<PlayerMono>
     }
     void Move()
     {
-        transform.Translate(InputController.movement * _speed * Time.deltaTime, Space.World);
+        transform.Translate(InputManager.movement * _speed * Time.deltaTime, Space.World);
     }
 
     Vector3 targetPos;
     Vector3 dirction;
     void RotateViewLight()
     {
-        targetPos = Camera.main.ScreenToWorldPoint(new Vector3(InputController.mousePosition.x, InputController.mousePosition.y, 10));
+        targetPos = Camera.main.ScreenToWorldPoint(new Vector3(InputManager.mousePosition.x, InputManager.mousePosition.y, 10));
         dirction = (targetPos - transform.position).normalized;
         viewlight.transform.localRotation = Quaternion.FromToRotation(transform.up, dirction);
     }

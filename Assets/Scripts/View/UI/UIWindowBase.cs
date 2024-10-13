@@ -75,6 +75,6 @@ public class UIWindowBase : MonoBehaviour,IController
 
     public IArchitecture GetArchitecture()
     {
-        return PirateBomb.Interface;
+        return Template.Interface;
     }
 }

@@ -59,6 +59,6 @@ public class CommonMono : MonoSingleton<CommonMono>, IController
 
     public IArchitecture GetArchitecture()
     {
-        return PirateBomb.Interface;
+        return Template.Interface;
     }
 }

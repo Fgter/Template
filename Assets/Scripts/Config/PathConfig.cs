@@ -7,8 +7,8 @@ public class PathConfig
     public const string SpritePath = "Sprites/";
     public const string PrefabPath = "Prefabs/";
 
+    public const string MusicPath = "Audios/Music/";
+    public const string SoundPath = "Audios/Sound/";
 
 
-
-    
 }

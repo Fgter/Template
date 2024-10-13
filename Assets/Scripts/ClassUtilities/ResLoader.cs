@@ -21,4 +21,14 @@ public class ResLoader
     {
         return Load<GameObject>(PathConfig.PrefabPath + path);
     }
+
+    public static AudioClip LoadSound(string soundName)
+    {
+        return Load<AudioClip>(PathConfig.SoundPath + soundName);
+    }
+
+    public static AudioClip LoadMusic(string musicName)
+    {
+        return Load<AudioClip>(PathConfig.SoundPath + musicName);
+    }
 }

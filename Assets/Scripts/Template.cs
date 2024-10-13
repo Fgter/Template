@@ -4,7 +4,7 @@ using UnityEngine;
 using QFramework;
 using Models;
 
-public class PirateBomb : Architecture<PirateBomb>
+public class Template : Architecture<Template>
 {
     protected override void Init()
     {
@@ -14,9 +14,10 @@ public class PirateBomb : Architecture<PirateBomb>
         //Model
         RegisterModel(new DefineModel());
         RegisterModel(new TimeModel());
+        RegisterModel(new PlayerSettingModel());
         RegisterModel(new ItemModel());
         RegisterModel(new PlayerModel());
-        RegisterModel(new ShopModel());
+        //RegisterModel(new ShopModel());
         //System
         RegisterSystem(new TimeSystem());
         RegisterSystem(new ShopSystem());

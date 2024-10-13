@@ -14,7 +14,7 @@ public class Test : ViewController, IController
 {
     public IArchitecture GetArchitecture()
     {
-        return PirateBomb.Interface;
+        return Template.Interface;
     }
     [ContextMenu("Test4")]
     public void Test4()
