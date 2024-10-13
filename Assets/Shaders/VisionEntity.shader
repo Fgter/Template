@@ -5,6 +5,9 @@
         _MainTex("Diffuse", 2D) = "white" {}
         _MaskTex("Mask", 2D) = "white" {}
         _NormalMap("Normal Map", 2D) = "bump" {}
+        _ShadowTex("ShadowTexture",2D) = "black"{}
+        _ShadowTexScale("ShadowTexScale", Vector) = (1, 1,0,0) 
+        _ShadowTexOffset("ShadowTexOffset",Vector) = (0,0,0,0)
 
         // Legacy properties. They're here so that materials using this shader can gracefully fallback to the legacy sprite shader.
         [HideInInspector] _Color("Tint", Color) = (1,1,1,1)
@@ -52,6 +55,7 @@
                 float2	uv          : TEXCOORD0;
                 float2	lightingUV  : TEXCOORD1;
                 float2  worldPos    : TEXCOORD2;
+                float2  shadowUV    : TEXCOORD3;
             };
 
             #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/LightingUtility.hlsl"
@@ -62,8 +66,13 @@
             SAMPLER(sampler_MaskTex);
             TEXTURE2D(_NormalMap);
             SAMPLER(sampler_NormalMap);
+            TEXTURE2D(_ShadowTex);
+            SAMPLER(sampler_ShadowTex);
             half4 _MainTex_ST;
             half4 _NormalMap_ST;
+            half4 _ShadowTexScale;
+            half4 _ShadowTexOffset;
+            uniform float _Light;
 
             #if USE_SHAPE_LIGHT_TYPE_0
             SHAPE_LIGHT(0)
@@ -91,6 +100,8 @@
                 o.lightingUV = ComputeScreenPos(clipVertex).xy;
                 o.color = v.color;
                 o.worldPos = mul (unity_ObjectToWorld, v.positionOS);
+                float2 shadowUV = (v.uv * _ShadowTexScale.xy) + _ShadowTexOffset.xy;
+                o.shadowUV = shadowUV;
                 return o;
             }
 
@@ -100,8 +111,9 @@
             {
                 half4 main = i.color * SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.uv);
                 half4 mask = SAMPLE_TEXTURE2D(_MaskTex, sampler_MaskTex, i.uv);
+                half4 shadow = SAMPLE_TEXTURE2D(_ShadowTex, sampler_ShadowTex, i.shadowUV);
 
-                return CombinedShapeLightShared(main, mask, i.lightingUV, i.worldPos);
+                return CombinedShapeLightShared(main, mask,shadow,i.lightingUV, i.worldPos);
             }
             ENDHLSL
         }

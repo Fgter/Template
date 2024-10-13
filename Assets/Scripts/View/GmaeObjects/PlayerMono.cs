@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerMono : MonoBehaviour
+public class PlayerMono : MonoSingleton<PlayerMono>
 {
     [SerializeField]
     Light2D viewlight;
     [SerializeField]
     float _speed;
 
+    IEnumerator Start()
+    {
+        viewlight.gameObject.SetActive(false);
+        yield return null;
+        viewlight.gameObject.SetActive(true);
+    }
     private void Update()
     {
         Move();

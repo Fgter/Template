@@ -5,7 +5,7 @@ half _HDREmulationScale;
 half _UseSceneLighting;
 half4 _RendererColor;
 
-half4 CombinedShapeLightShared(half4 color, half4 mask, half2 lightingUV, half2 worldUV)
+half4 CombinedShapeLightShared(half4 color, half4 mask,half4 shadow,half2 lightingUV, half2 worldUV)
 {
     color = color * _RendererColor;
 
@@ -79,8 +79,22 @@ half4 CombinedShapeLightShared(half4 color, half4 mask, half2 lightingUV, half2 
     half4 finalAdditve = shapeLight0Additive + shapeLight2Additive + shapeLight1Additive;
     finalOutput = _HDREmulationScale * (color * finalModulate + finalAdditve);
 #endif
-    finalOutput.a = color.a * visionMask;
-    
+
+    //if(visionMask.r>0)
+    //{
+    //    finalOutput = color;
+    //}
+    //else
+    //{
+    //    finalOutput.a = 0;
+    //}
+
+    finalOutput.a = smoothstep(0,0.1,(color.a * visionMask)); 
+    //finalOutput = visionMask
+    //else
+    //{
+    //    finalOutput = shadow;
+    //}
     finalOutput = finalOutput * _UseSceneLighting + (1 - _UseSceneLighting) * color;
     
     return max(0, finalOutput);

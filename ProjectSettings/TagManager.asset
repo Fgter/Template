@@ -44,3 +44,6 @@ TagManager:
   - name: IgonreNormalLight
     uniqueID: 2851310841
     locked: 0
+  - name: IgonreViewLight
+    uniqueID: 3979751125
+    locked: 0
